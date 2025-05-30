@@ -17,11 +17,23 @@ void attack(int *enemyHP) {
 }
 #endif
 
+#ifdef ENEMYATTACK
+void getDemage(int enemyAttack) {
+    if(HP - enemyAttack >= 0) {
+        HP = HP - enemyAttack;
+    } else {
+        HP = 0;
+    }
+    printf("\nYou have %d HP left.", HP);
+}
+#endif
+
 int main() {
     srand(time(NULL));
     char input;
     //random number between 5 and 8 (inclusive)
     int enemyHP = rand() % 8 + 5;
+    int enemyAttack = rand() % 3 + 1;
 
     printf("Actions:");
     printf("\na = attack the enemy with %d damage", damage);
@@ -43,6 +55,7 @@ int main() {
             printf("\nYou skipped your turn.");
         }
         printf("\nENEMY'S TURN");
+        getDemage(enemyAttack);
     }
     if(HP > 0) {
         printf("\n~~VICTORY~~");
