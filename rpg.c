@@ -17,6 +17,18 @@ void attack(int *enemyHP) {
 }
 #endif
 
+#ifdef HEAL
+void heal() {
+    printf("\nYou used heal.");
+    if(HP + 20 <= 10){
+        HP = HP + 20;
+    } else {
+        HP = 10;
+    }
+    printf("\nHP increased to %d.", HP);
+}
+#endif
+
 #ifdef ENEMYATTACK
 void getDemage(int enemyAttack) {
     if(HP - enemyAttack >= 0) {
@@ -37,6 +49,7 @@ int main() {
 
     printf("Actions:");
     printf("\na = attack the enemy with %d damage", damage);
+    printf("\nh = use heal to get 2 HP back");
     printf("\nx = exit");
     printf("\nIn case of entering a character, that is not among these, you skip your turn.\n");
     
@@ -47,6 +60,9 @@ int main() {
         switch (input) {
         case 'a':
             attack(&enemyHP);
+            break;
+        case 'h':
+            heal();
             break;
         case 'x':
             return 0;
