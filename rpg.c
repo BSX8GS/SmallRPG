@@ -40,6 +40,18 @@ void getDemage(int enemyAttack) {
 }
 #endif
 
+#ifdef DODGE
+int dodge(int random) {
+    //dodge with 1:5 chance
+    if(1 == random){
+        printf("\nYou have dodged the attack of the enemy.");        
+        return 0;
+    } else {
+        return 1;
+    }
+}
+#endif
+
 int main() {
     srand(time(NULL));
     char input;
@@ -71,7 +83,9 @@ int main() {
             printf("\nYou skipped your turn.");
         }
         printf("\nENEMY'S TURN");
-        getDemage(enemyAttack);
+        if(dodge(rand() % 5 + 1) == 1) {
+            getDemage(enemyAttack);
+        }
     }
     if(HP > 0) {
         printf("\n~~VICTORY~~");
